@@ -11,7 +11,27 @@ public class LisaWorkbook {
 //5
     }
 
-    public static int workbook(int n, int k, List<Integer> arr) {
+    static int workbook(int n, int k, List<Integer> arr) {
+        int result = 0;
+        int pageIndex = 0;
+        for (int i = 0; i < arr.size(); i++) {
+            int noOfProblems = arr.get(i);
+            int probStartNumber = 1;
+            int probEndNumber = Math.min(noOfProblems, k);
+            while (noOfProblems > 0) {
+                pageIndex++;
+                if (pageIndex >= probStartNumber && pageIndex <= probEndNumber) {
+                    System.out.println("PageIndex: " + pageIndex + ", chapter:" + (i + 1) + " noOfroblems:" + arr.get(i));
+                    result++;
+                }
+                noOfProblems = noOfProblems - k;
+                probStartNumber = probStartNumber + k;
+                probEndNumber = probEndNumber + Math.min(noOfProblems, k);
+            }
+        }
+        return result;
+    }
+    /*public static int workbook(int n, int k, List<Integer> arr) {
         // Write your code here
         int pageIndex = 0;
         int specialQns = 0;
@@ -36,6 +56,6 @@ public class LisaWorkbook {
         }
         System.out.println(specialQns);
         return 0;
-    }
+    }*/
 }
 //https://www.hackerrank.com/challenges/lisa-workbook/problem?utm_campaign=challenge-recommendation&utm_medium=email&utm_source=7-day-campaign
